@@ -7,9 +7,6 @@ interface ButtonProps {
     handleSort: (type: string) => void;
     sortType: string | null;
     sortOrder: 'asc' | 'desc' | null
-    // age: number;
-    // isAdmin?: boolean; // Optional prop
-    // onClick: (event: React.MouseEvent<HTMLButtonElement>) => void; // Function prop
 }
 
 

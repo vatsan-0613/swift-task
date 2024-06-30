@@ -23,6 +23,7 @@ export default function Home() {
   const [page, setPage] = useState<number>(() => getLocalStorage('page', 1));
   const [sortType, setSortType] = useState<string | null>(() => getLocalStorage('sortType', null));
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(() => getLocalStorage('sortOrder', null));
+  const [searchTerm, setSearchTerm] = useState<string>(() => getLocalStorage('searchTerm', ""));
 
   const handleSort = (type: string) => {
     if (sortType === type) {
@@ -66,6 +67,10 @@ export default function Home() {
     setLocalStorage('sortOrder', sortOrder);
   }, [sortType, sortOrder]);
 
+  useEffect(() => {
+    setLocalStorage('searchTerm', searchTerm);
+  }, [searchTerm]);
+
   const sortedData = [...tableData].sort((a, b) => {
     if (!sortType || !sortOrder) return 0;
 
@@ -86,12 +91,23 @@ export default function Home() {
     return 0;
   });
 
+  const filteredData = sortedData.filter(comment =>
+    comment.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    comment.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    comment.body.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const buttons = [
     { name: "postId" },
     { name: "name" },
     { name: "email" }
   ];
 
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+    setPage(1);
+  };
+  
   const handleRecordsPerPage = (event: ChangeEvent<HTMLSelectElement>) => {
     setRecordsPerPage(parseInt(event.target.value));
   };
@@ -122,12 +138,12 @@ export default function Home() {
             ))}
           </div>
           <div className="flex justify-end">
-            <SearchBox />
+            <SearchBox searchTerm={searchTerm} handleSearch={handleSearch} />
           </div>
         </div>
         <div className="mt-7 rounded-md mb-5 overflow-x-scroll md:overflow-auto md:w-[84%] w-full mx-auto">
           <Table
-            comments={sortedData.slice((page - 1) * recordsPerPage, (page - 1) * recordsPerPage + recordsPerPage)}
+            comments={filteredData.slice((page - 1) * recordsPerPage, (page - 1) * recordsPerPage + recordsPerPage)}
           />
         </div>
         <div className="flex justify-end items-center gap-3 sm:px-[5%] px-[8%]">

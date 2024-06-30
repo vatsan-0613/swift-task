@@ -10,13 +10,6 @@ interface Comment {
 
 type CommentsArray = Comment[];
 
-interface ButtonProps {
-    name: string;
-    // age: number;
-    // isAdmin?: boolean; // Optional prop
-    // onClick: (event: React.MouseEvent<HTMLButtonElement>) => void; // Function prop
-}
-
 const Table:React.FC<{comments : CommentsArray}> = ({comments}) => {
   return (
     <table className='w-full table-auto'>
