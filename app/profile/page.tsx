@@ -102,7 +102,7 @@ const Profile = () => {
                     </div>
                 </>
             ) : (
-                <>User details wasn&apos;t fetched</>
+                <>Loading...</>
             )}
         </section>
     );
