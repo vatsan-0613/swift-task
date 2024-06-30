@@ -134,7 +134,7 @@ export default function Home() {
   return (
     <main>
       <main className="mt-10 mb-10">
-        <div className="grid md:grid-cols-2 grid-cols-1 px-[8%] ">
+        <div className="grid md:grid-cols-2 grid-cols-1 px-[8%]">
           <div className="flex gap-3">
             {buttons.map(button => (
               <SortingButton
@@ -155,7 +155,7 @@ export default function Home() {
             comments={filteredData.slice((page - 1) * recordsPerPage, (page - 1) * recordsPerPage + recordsPerPage)}
           />
         </div>
-        <div className="flex justify-end items-center gap-3 sm:px-[5%] px-[8%]">
+        <div className="flex justify-end items-center gap-3 px-[8%]">
           <div className="text-xs">
             {(page - 1) * recordsPerPage + 1} to {(page - 1) * recordsPerPage + recordsPerPage} of {sortedData.length}
           </div>
