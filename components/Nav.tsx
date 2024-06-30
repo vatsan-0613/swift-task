@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import swiftLogo  from '@/public/swift-logo.svg'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface Geo {
     lat: string;
@@ -55,7 +56,7 @@ const Nav: React.FC = () => {
     return (
         <nav className='flex justify-between px-[8%] py-4 items-center bg-background-color'>
             <Image src={swiftLogo} width={100} height={100} alt='logo' />
-            <div className='font-semibold text-primary-color'>{user && user.name}</div>
+            <Link href="/profile"><div className='font-semibold text-primary-color'>{user && user.name}</div></Link>
         </nav>
     )
 }
