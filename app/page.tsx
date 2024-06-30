@@ -19,11 +19,20 @@ type CommentsArray = Comment[];
 export default function Home() {
 
   const [tableData, setTableData] = useState<CommentsArray>([]);
-  const [recordsPerPage, setRecordsPerPage] = useState<number>(() => getLocalStorage('recordsPerPage', 10));
-  const [page, setPage] = useState<number>(() => getLocalStorage('page', 1));
-  const [sortType, setSortType] = useState<string | null>(() => getLocalStorage('sortType', null));
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(() => getLocalStorage('sortOrder', null));
-  const [searchTerm, setSearchTerm] = useState<string>(() => getLocalStorage('searchTerm', ""));
+  const [recordsPerPage, setRecordsPerPage] = useState<number>(10);
+  const [page, setPage] = useState<number>(1);
+  const [sortType, setSortType] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  useEffect(() => {
+    setRecordsPerPage(getLocalStorage('recordsPerPage', 10));
+    setPage(getLocalStorage('page', 1));
+    setSortType(getLocalStorage('sortType', null));
+    setSortOrder(getLocalStorage('sortOrder', null));
+    setSearchTerm(getLocalStorage('searchTerm', ''));
+  }, []);
+
 
   const handleSort = (type: string) => {
     if (sortType === type) {
