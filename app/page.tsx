@@ -119,6 +119,7 @@ export default function Home() {
   
   const handleRecordsPerPage = (event: ChangeEvent<HTMLSelectElement>) => {
     setRecordsPerPage(parseInt(event.target.value));
+    setPage(1);
   };
 
   const toggleNextPage = () => {
